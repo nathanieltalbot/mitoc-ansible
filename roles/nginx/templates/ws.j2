@@ -25,7 +25,6 @@ server {
     ssl_dhparam          /etc/ssl/certs/dhparams.pem;
     {% endif %}
 
-
     client_max_body_size 4G;
 
     access_log {{ nginx_access_log_file }};
