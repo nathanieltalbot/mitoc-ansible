@@ -12,10 +12,6 @@ db_password: password
 gunicorn_max_requests: 1
 
 
-# Nginx settings.
-nginx_strong_dh_group: yes  # Strongly recomended in production. See weakdh.org
-
-
 # RabbitMQ settings.
 rabbitmq_admin_user: admin
 rabbitmq_admin_password: password
