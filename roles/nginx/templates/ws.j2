@@ -42,6 +42,11 @@ server {
 
     location /static/ {
         alias   {{ nginx_static_dir }};
+        gzip_static on;
+        expires     max;
+        add_header  Cache-Control public;
+        add_header  Last-Modified "";
+        add_header  ETag "";
     }
 
     location /media/ {
