@@ -43,3 +43,4 @@ django_environment:
   OAUTH_JSON_CREDENTIALS: "{{ project_path }}/oauth_credentials.json"
   RAVEN_DSN: "{{ raven_dsn|default('') }}"
   WS_DJANGO_LOCAL: "{{ django_debug|default('') }}"
+  EC2_IP: "{{ ec2_ip|default('') }}"
