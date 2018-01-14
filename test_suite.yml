@@ -1,19 +1,21 @@
 ---
 
-- name: Create a {{ application_name }} virtual machine via vagrant
+- name: Use molecule to test all roles in the playbook.
   hosts: all
   become: yes
   become_user: root
-  remote_user: vagrant
+  remote_user: root
   vars:
     update_apt_cache: yes
+    force_ssh_authentication: no
+    ansible_python_interpreter: /usr/bin/python
   vars_files:
     - env_vars/base.yml
     - env_vars/vagrant.yml
 
   roles:
+    - security
     - base
-    - avahi
     - db
     - rabbitmq
     - web

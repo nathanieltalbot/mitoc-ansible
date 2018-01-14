@@ -8,7 +8,13 @@ VAGRANTFILE_API_VERSION = "2"
 ANSIBLE_TAGS=ENV['ANSIBLE_TAGS']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "trusty64"
+  config.vm.box = "ubuntu/xenial64"
+
+  config.vm.define "mitoc-trips.local", primary: true do |app|
+    app.vm.hostname = "mitoc-trips"
+
+    app.vm.network "private_network", type: "dhcp"
+  end
 
   config.vm.provider :virtualbox do |vb, override|
     override.vm.provision "ansible" do |ansible|
@@ -17,8 +23,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.verbose = "vv"
       ansible.tags = ANSIBLE_TAGS
     end
-
-    override.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
     override.vm.network :private_network, ip: "192.168.33.15"
     vb.customize ["modifyvm", :id, "--name", "MITOC Trips", "--memory", "1024"]
@@ -53,4 +57,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = "#{Dir.home}/vagrant.pem"
   end
+
+  config.vm.provider :docker do |d, override|
+    override.vm.box = nil
+
+    d.name = "ws"
+    d.build_dir = "docker"
+    d.create_args = ["--publish-all", "--security-opt=seccomp:unconfined",
+                     "--tmpfs=/run", "--tmpfs=/run/lock", "--tmpfs=/tmp",
+                     "--volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+    d.has_ssh = true
+  end
+
+  # For local development, uncommenting and editing the line below will enable
+  # a folder in the host machine containing your local git repo to be synced to
+  # the guest machine. Ensure the Ansible playbook variable "setup_git_repo" is
+  # set to "no" (in env_vars/vagrant.yml) when enabling this.
+  #config.vm.synced_folder "../../../my-cool-app", "/webapps/mycoolapp/my-cool-app"
 end

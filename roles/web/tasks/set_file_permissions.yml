@@ -6,4 +6,4 @@
         owner={{ gunicorn_user }}
         group={{ gunicorn_group }}
         state=directory
-  notify: restart application
+  changed_when: False

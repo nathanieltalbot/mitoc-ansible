@@ -6,6 +6,7 @@
        dest={{ project_path }}
        accept_hostkey=yes
   when: setup_git_repo is defined and setup_git_repo
+  notify: restart application
   tags: git
 
 - name: Delete all .pyc files
@@ -13,3 +14,4 @@
   args:
     chdir: "{{ project_path }}"
   tags: git
+  changed_when: False
