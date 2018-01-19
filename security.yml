@@ -1,6 +1,6 @@
 ---
 
-- name: Initial configuration for a {{ application_name }} server
+- name: Initial configuration for a {{ root_name }} server
   hosts: all
   become: yes
   become_user: root

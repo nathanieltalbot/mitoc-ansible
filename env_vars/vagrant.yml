@@ -6,11 +6,11 @@ git_branch: master
 
 
 # Database settings.
-db_user: "{{ application_name }}"
-db_name: "{{ application_name }}"
+db_user: "{{ django_application_name }}"
+db_name: "{{ django_application_name }}"
 db_password: password
 
-gear_db_user: "{{ application_name }}"
+gear_db_user: "{{ django_application_name }}"
 gear_db_password: "password"
 gear_db_name: "geardb"
 
@@ -29,8 +29,8 @@ rabbitmq_server_name: "{{ inventory_hostname }}"
 rabbitmq_admin_user: admin
 rabbitmq_admin_password: password
 
-rabbitmq_application_vhost: "{{ application_name }}"
-rabbitmq_application_user: "{{ application_name }}"
+rabbitmq_application_vhost: "{{ django_application_name }}"
+rabbitmq_application_user: "{{ django_application_name }}"
 rabbitmq_application_password: password
 
 
@@ -39,7 +39,7 @@ celery_num_workers: 2
 
 
 # Application settings.
-django_settings_file: "{{ application_name }}.settings"
+django_settings_file: "{{ django_application_name }}.settings"
 django_debug: "1"
 django_secret_key: "akr2icmg1n8%z^3fe3c+)5d0(t^cy-2_25rrl35a7@!scna^1#"
 membership_secret_key: "d93afbdf8c81d14c4e9028b9759a8cfe9b"

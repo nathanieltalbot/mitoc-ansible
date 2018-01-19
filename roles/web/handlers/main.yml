@@ -1,4 +1,4 @@
 ---
 
 - name: restart application
-  supervisorctl: name={{ application_name }} state=restarted
+  supervisorctl: name={{ django_application_name }} state=restarted

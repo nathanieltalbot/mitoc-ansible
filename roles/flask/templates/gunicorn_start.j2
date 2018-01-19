@@ -1,8 +1,8 @@
 #!/bin/sh
 
-NAME="{{ application_name }}"
-FLASKDIR="{{ project_path }}"
-SOCKFILE={{ virtualenv_path }}/run/gunicorn.sock
+NAME="{{ flask_application_name }}"
+FLASKDIR="{{ flask_project_path }}"
+SOCKFILE={{ flask_virtualenv_path }}/run/gunicorn.sock
 USER={{ gunicorn_user }}
 GROUP={{ gunicorn_group }}
 NUM_WORKERS={{ gunicorn_num_workers }}
@@ -16,10 +16,10 @@ echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment.
 cd $FLASKDIR
-. {{ virtualenv_path }}/bin/activate
+. {{ flask_virtualenv_path }}/bin/activate
 
 # Set additional environment variables.
-. {{ virtualenv_path }}/bin/postactivate
+. {{ flask_virtualenv_path }}/bin/postactivate
 
 # Create the run directory if it doesn't exist.
 RUNDIR=$(dirname $SOCKFILE)
@@ -35,4 +35,4 @@ exec gunicorn \
     --user $USER --group $GROUP \
     --log-level debug \
     --bind unix:$SOCKFILE \
-    {{ application_name }}.wsgi
+    {{ flask_application_name }}.wsgi

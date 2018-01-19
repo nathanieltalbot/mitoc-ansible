@@ -1,5 +1,4 @@
 ---
-application_name: "{{ flask_application_name }}"
 
 # Override otherwise global settings for using Python 2.7
 enable_deadsnakes_ppa: yes

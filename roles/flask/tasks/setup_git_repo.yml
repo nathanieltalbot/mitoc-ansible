@@ -1,9 +1,9 @@
 ---
 
 - name: Setup the Git repo
-  git: repo={{ git_repo }}
+  git: repo={{ flask_git_repo }}
        version={{ git_branch }}
-       dest={{ project_path }}
+       dest={{ flask_project_path }}
        accept_hostkey=yes
   when: setup_git_repo is defined and setup_git_repo
   notify: restart application
@@ -12,6 +12,6 @@
 - name: Delete all .pyc files
   command: find . -name '*.pyc' -delete
   args:
-    chdir: "{{ project_path }}"
+    chdir: "{{ flask_project_path }}"
   tags: git
   changed_when: False

@@ -18,22 +18,22 @@
 - name: Ensure no existing virtualenv exists
   file:
     state: absent
-    path: "{{ virtualenv_path }}/"
+    path: "{{ flask_virtualenv_path }}/"
   when: recreate_virtualenv
 
 - name: Create the virtualenv
-  command: virtualenv -p {{ virtualenv_python_version }} {{ virtualenv_path }}
-           creates={{ virtualenv_path }}/bin/activate
+  command: virtualenv -p {{ virtualenv_python_version }} {{ flask_virtualenv_path }}
+           creates={{ flask_virtualenv_path }}/bin/activate
 
 - name: Ensure gunicorn and pycurl are installed in the virtualenv
-  pip: virtualenv={{ virtualenv_path }} name={{ item }}
+  pip: virtualenv={{ flask_virtualenv_path }} name={{ item }}
   with_items:
     - gunicorn
     - pycurl
 
 - name: Create the Gunicorn script file
   template: src=gunicorn_start.j2
-            dest={{ virtualenv_path }}/bin/gunicorn_start
+            dest={{ flask_virtualenv_path }}/bin/gunicorn_start
             owner={{ gunicorn_user }}
             group={{ gunicorn_group }}
             mode=0755
@@ -41,7 +41,7 @@
   tags: deploy
 
 - name: Create the application log folder
-  file: path={{ application_log_dir }}
+  file: path={{ flask_application_log_dir }}
         owner={{ gunicorn_user }}
         group={{ gunicorn_group }}
         mode=0774
@@ -49,7 +49,7 @@
 
 - name: Create (or retain) the application log file
   copy: content=""
-        dest={{ application_log_file }}
+        dest={{ flask_application_log_file }}
         owner={{ gunicorn_user }}
         group={{ gunicorn_group }}
         mode=0664
@@ -57,7 +57,7 @@
 
 - name: Create the virtualenv postactivate script to set environment variables
   template: src=virtualenv_postactivate.j2
-            dest={{ virtualenv_path }}/bin/postactivate
+            dest={{ flask_virtualenv_path }}/bin/postactivate
             owner={{ gunicorn_user }}
             group={{ gunicorn_group }}
             mode=0640

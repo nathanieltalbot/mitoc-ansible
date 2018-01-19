@@ -1,6 +1,6 @@
 ---
 
-- name: Provision a {{ application_name }} db server
+- name: Provision a {{ root_name }} db server
   hosts: dbservers
   become: yes
   become_user: root

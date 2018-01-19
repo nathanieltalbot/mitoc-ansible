@@ -2,10 +2,10 @@
 
 server_root_dir: /webapps
 
-virtualenv_path: "/webapps/{{ application_name }}"
-project_path: "{{ virtualenv_path }}/{{ project_name }}"
+virtualenv_path: "/webapps/{{ django_application_name }}"
+project_path: "{{ virtualenv_path }}/{{ django_project_name }}"
 
-celery_user: "{{ application_name }}"
+celery_user: "{{ django_application_name }}"
 celery_group: webapps
 
 celery_state_dir: "/var/run/celery"

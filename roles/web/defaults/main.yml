@@ -9,8 +9,8 @@ virtualenv_python_version: "{{ base_python_package }}"
 
 
 # Application settings.
-virtualenv_path: "/webapps/{{ application_name }}"
-project_path: "{{ virtualenv_path }}/{{ project_name }}"
+virtualenv_path: "/webapps/{{ django_application_name }}"
+project_path: "{{ virtualenv_path }}/{{ django_project_name }}"
 application_log_dir: "{{ virtualenv_path }}/logs"
 application_log_file: "{{ application_log_dir }}/gunicorn_supervisor.log"
 django_error_file: "{{ application_log_dir }}/django_errors.log"
@@ -18,7 +18,7 @@ requirements_file: "{{ project_path }}/requirements.txt"
 
 
 # Gunicorn settings.
-gunicorn_user: "{{ application_name }}"
+gunicorn_user: "{{ django_application_name }}"
 gunicorn_group: webapps
 
 

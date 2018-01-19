@@ -1,9 +1,11 @@
 ---
 
-project_name: trips
-application_name: ws
+root_name: mitoc
 
-flask_project_name: mitoc_member
+django_project_name: mitoc-trips
+django_application_name: ws
+
+flask_project_name: mitoc-member
 flask_application_name: member
 
 
@@ -23,7 +25,7 @@ broker_url: "amqp://{{ rabbitmq_application_user }}:{{ rabbitmq_application_pass
 # Application settings
 run_django_db_migrations: yes
 run_django_collectstatic: yes
-django_settings_file: "{{ application_name }}.settings" # Dev/prod determined by envvar
+django_settings_file: "{{ django_application_name }}.settings" # Dev/prod determined by envvar
 
 
 # Worker settings
