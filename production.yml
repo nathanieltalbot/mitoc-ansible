@@ -18,3 +18,4 @@
     - web
     - celery
     - nginx
+    - flask

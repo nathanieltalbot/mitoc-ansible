@@ -1,0 +1,4 @@
+---
+
+- name: Install packages required by the Flask app inside virtualenv
+  pip: virtualenv={{ virtualenv_path }} requirements={{ requirements_file }}

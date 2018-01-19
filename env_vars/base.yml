@@ -3,6 +3,9 @@
 project_name: trips
 application_name: ws
 
+flask_project_name: mitoc_member
+flask_application_name: member
+
 
 
 # Database settings.

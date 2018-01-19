@@ -1,0 +1,7 @@
+---
+application_name: "{{ flask_application_name }}"
+
+# Override otherwise global settings for using Python 2.7
+enable_deadsnakes_ppa: yes
+recreate_virtualenv: no
+virtualenv_python_version: python3.6

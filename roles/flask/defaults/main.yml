@@ -1,0 +1,29 @@
+---
+git_repo: https://github.com/DavidCain/mitoc-member
+setup_git_repo: yes
+
+# Application settings.
+virtualenv_path: "/webapps/{{ application_name }}"
+project_path: "{{ virtualenv_path }}/{{ project_name }}"
+application_log_dir: "{{ virtualenv_path }}/logs"
+application_log_file: "{{ application_log_dir }}/gunicorn_supervisor.log"
+requirements_file: "{{ project_path }}/requirements.txt"
+
+
+# Gunicorn settings.
+gunicorn_user: "{{ application_name }}"
+gunicorn_group: webapps
+
+
+# Nginx settings.
+# nginx_access_log_file: "{{ application_log_dir }}/nginx_access.log"
+# nginx_error_log_file: "{{ application_log_dir }}/nginx_error.log"
+
+
+# Flask environment variables.
+flask_environment:
+  MEMBERSHIP_SECRET_KEY: "{{ membership_secret_key }}"
+  GEAR_DATABASE_NAME: "{{ gear_db_name }}"
+  GEAR_DATABASE_USER: "{{ gear_db_user }}"
+  GEAR_DATABASE_PASSWORD: "{{ gear_db_password }}"
+  GEAR_DATABASE_HOST: "{{ gear_db_host|default('localhost') }}"
