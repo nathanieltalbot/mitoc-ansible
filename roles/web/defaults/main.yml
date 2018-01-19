@@ -1,4 +1,6 @@
 ---
+git_repo: https://github.com/DavidCain/mitoc-trips.git
+setup_git_repo: yes
 
 # Virtualenv settings.
 enable_deadsnakes_ppa: no
