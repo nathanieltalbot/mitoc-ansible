@@ -27,3 +27,4 @@ flask_environment:
   GEAR_DATABASE_USER: "{{ gear_db_user }}"
   GEAR_DATABASE_PASSWORD: "{{ gear_db_password }}"
   GEAR_DATABASE_HOST: "{{ gear_db_host|default('localhost') }}"
+  RAVEN_DSN: "{{ flask_raven_dsn|default('') }}"
