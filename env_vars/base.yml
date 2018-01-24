@@ -40,4 +40,3 @@ celery_num_workers: 2
 #
 # More info here: https://launchpad.net/~fkrull/+archive/ubuntu/deadsnakes
 # enable_deadsnakes_ppa: yes
-virtualenv_python_version: python2.7

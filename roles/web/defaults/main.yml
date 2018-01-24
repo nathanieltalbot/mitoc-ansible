@@ -5,7 +5,7 @@ setup_git_repo: yes
 # Virtualenv settings.
 enable_deadsnakes_ppa: no
 recreate_virtualenv: no
-virtualenv_python_version: "{{ base_python_package }}"
+virtualenv_python_version: python2.7
 
 
 # Application settings.
