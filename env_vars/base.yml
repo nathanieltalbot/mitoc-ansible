@@ -42,7 +42,12 @@ celery_num_workers: 2
 # More info here: https://launchpad.net/~fkrull/+archive/ubuntu/deadsnakes
 # enable_deadsnakes_ppa: yes
 
-
+# This is the SSL fingerprint of the DocuSign DEMO API, Obtained by running:
+#     openssl x509 -in <cert> -noout -fingerprint
+# On the demo Connect certificate on DocuSign's website
+# https://trust.docusign.com/en-us/trust-certifications/docusign-public-certificates/
+# (The production fingerprint must be used in prod, for obvious reasons)
+docusign_client_fingerprint: d2818c5263a98ca63ce0cad359f912736cc3a0ce
 root_crt: |
   -----BEGIN CERTIFICATE-----
   MIIE0zCCA7ugAwIBAgIQGNrRniZ96LtKIVjNzGs7SjANBgkqhkiG9w0BAQUFADCB

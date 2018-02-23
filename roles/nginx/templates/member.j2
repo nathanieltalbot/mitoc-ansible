@@ -42,6 +42,12 @@ server {
     access_log {{ flask_nginx_access_log_file }};
     error_log {{ flask_nginx_error_log_file }};
 
+    location /members/waiver {
+        if ($ssl_client_fingerprint != "{{ docusign_client_fingerprint }}") {
+          return 403;
+        }
+    }
+
     location /members/ {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto https;
