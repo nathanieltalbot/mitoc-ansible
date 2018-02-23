@@ -7,31 +7,39 @@
 - name: Copy the SSL certificate to the remote server
   copy: content={{ ssl_crt }} dest={{ nginx_ssl_dest_dir }}/{{ root_name }}.crt
   notify: restart nginx
-  when: not nginx_use_letsencrypt
+
+- name: Copy root SSL certificate to remote server
+  copy: content={{ root_crt }} dest={{ nginx_ssl_dest_dir }}/{{ client_root_name }}.crt
+  notify: restart nginx
 
 - name: Copy the SSL private key to the remote server
   copy: content={{ ssl_key }} dest={{ nginx_ssl_dest_dir }}/{{ root_name }}.key
   notify: restart nginx
-  when: not nginx_use_letsencrypt
 
 - name: Ensure that a strong Diffie-Hellman group is used
   command: openssl dhparam -out /etc/ssl/certs/dhparams.pem 2048 creates=/etc/ssl/certs/dhparams.pem
   when: nginx_strong_dh_group is defined and nginx_strong_dh_group
 
-- name: Create the Nginx configuration file
-  template: src={{ django_application_name }}.j2
-            dest=/etc/nginx/sites-available/{{ django_application_name }}
+- name: Create the Nginx configuration files
+  template: src={{ item }}.j2
+            dest=/etc/nginx/sites-available/{{ item }}
             backup=yes
+  with_items:
+    - "{{ django_application_name }}"
+    - "{{ flask_application_name }}"
   notify: reload nginx
 
 - name: Ensure that the default site is disabled
   file: path=/etc/nginx/sites-enabled/default state=absent
   notify: reload nginx
 
-- name: Ensure that the application site is enabled
-  file: src=/etc/nginx/sites-available/{{ django_application_name }}
-        dest=/etc/nginx/sites-enabled/{{ django_application_name }}
+- name: Ensure that the application sites are enabled
+  file: src=/etc/nginx/sites-available/{{ item }}
+        dest=/etc/nginx/sites-enabled/{{ item }}
         state=link
+  with_items:
+    - "{{ django_application_name }}"
+    - "{{ flask_application_name }}"
   notify: reload nginx
 
 - name: Ensure Nginx service is started
