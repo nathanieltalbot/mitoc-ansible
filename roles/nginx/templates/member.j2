@@ -7,12 +7,6 @@ upstream {{ flask_application_name }}_wsgi_server {
 }
 
 server {
-    listen      80;
-    server_name {{ api_url }};
-    rewrite     ^ https://$server_name$request_uri? permanent;
-}
-
-server {
     listen              443;
     server_name         {{ api_url }};
     ssl on;
@@ -42,21 +36,34 @@ server {
     access_log {{ flask_nginx_access_log_file }};
     error_log {{ flask_nginx_error_log_file }};
 
+    error_page 418 = @request_authorized;
+
     location /members/waiver {
         if ($ssl_client_fingerprint != "{{ docusign_client_fingerprint }}") {
           return 403;
         }
+        return 418;
+    }
+
+    location /members/membership {
+        # (This is fine for now - the route itself requires a signed payload)
+        # But we should actually find out the client fingerprint
+        #if ($ssl_client_fingerprint != "{{ cybersource_client_fingerprint }}") {
+        #  return 403;
+        #}
+        return 418;
     }
 
     location /members/ {
+        return 418;
+    }
+
+    location @request_authorized {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto https;
         proxy_set_header Host $http_host;
         proxy_redirect off;
 
-        if (!-f $request_filename) {
-            proxy_pass http://{{ flask_application_name }}_wsgi_server;
-            break;
-        }
+        proxy_pass http://{{ flask_application_name }}_wsgi_server;
     }
 }

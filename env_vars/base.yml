@@ -48,6 +48,9 @@ celery_num_workers: 2
 # https://trust.docusign.com/en-us/trust-certifications/docusign-public-certificates/
 # (The production fingerprint must be used in prod, for obvious reasons)
 docusign_client_fingerprint: d2818c5263a98ca63ce0cad359f912736cc3a0ce
+
+cybersource_client_fingerprint: unknown_find_later
+
 root_crt: |
   -----BEGIN CERTIFICATE-----
   MIIE0zCCA7ugAwIBAgIQGNrRniZ96LtKIVjNzGs7SjANBgkqhkiG9w0BAQUFADCB
