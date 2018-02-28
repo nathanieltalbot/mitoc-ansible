@@ -4,8 +4,8 @@ setup_git_repo: yes
 
 # Virtualenv settings.
 enable_deadsnakes_ppa: no
-recreate_virtualenv: no
-virtualenv_python_version: python2.7
+recreate_virtualenv: yes
+virtualenv_python_version: python3.6
 
 
 # Application settings.
