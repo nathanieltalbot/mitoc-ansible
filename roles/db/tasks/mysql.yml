@@ -1,0 +1,44 @@
+---
+
+- name: Install MySQL
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
+  with_items:
+    - mysql-server
+    - mysql-client
+    - libmysqlclient-dev
+  tags: packages
+
+- name: Install mysqlclient
+  pip: name=mysqlclient
+  tags: packages
+
+- name: Ensure the MySQL service is running
+  service: name=mysql state=started enabled=yes
+
+- name: update MySQL root password from the blank default
+  sudo: yes
+  mysql_user: name=root
+              host="{{ gear_db_host }}"
+              password="{{ mysql_root_password }}"
+              login_user=root
+              login_password="{{ mysql_root_password }}"
+              check_implicit_admin=yes
+              priv="*.*:ALL,GRANT"
+
+- name: Ensure that gear database is created
+  become: yes
+  become_user: mysql
+  mysql_db: name={{ gear_db_name }}
+            login_user=root
+            login_password="{{ mysql_root_password }}"
+            state=present
+
+- name: Ensure user has access to the database
+  become: yes
+  become_user: mysql
+  mysql_user: name={{ gear_db_user }}
+              password={{ gear_db_password }}
+              login_user=root
+              login_password="{{ mysql_root_password }}"
+              priv="*.*:ALL,GRANT"
+              state=present
