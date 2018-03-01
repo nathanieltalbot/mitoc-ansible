@@ -53,6 +53,7 @@ django_environment:
   RAVEN_DSN: "{{ raven_dsn|default('') }}"
   WS_DJANGO_LOCAL: "{{ django_debug|default('') }}"
   EC2_IP: "{{ ec2_ip|default('') }}"
+  DOCUSIGN_API_BASE: "{{ docusign_api_base|default('') }}"
   DOCUSIGN_USERNAME: "{{ docusign_username|default('') }}"
   DOCUSIGN_PASSWORD: "{{ docusign_password|default('') }}"
   DOCUSIGN_INTEGRATOR_KEY: "{{ docusign_integrator_key|default('') }}"
