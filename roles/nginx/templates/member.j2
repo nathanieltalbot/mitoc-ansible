@@ -1,3 +1,12 @@
+# Define log format that includes client's fingerprint
+# (This is useful for asserting the identity of the client
+log_format ssl_client
+  '$remote_addr - $remote_user [$time_local] '
+  '"$request" $status $body_bytes_sent '
+  '"Client fingerprint" $ssl_client_fingerprint '
+  '"Client DN" $ssl_client_s_dn';
+
+
 upstream {{ flask_application_name }}_wsgi_server {
   # fail_timeout=0 means we always retry an upstream even if it failed
   # to return a good HTTP response (in case the Unicorn master nukes a
@@ -33,7 +42,7 @@ server {
     # DocuSign in particular sends large PDF attachments
     client_max_body_size 50M;
 
-    access_log {{ flask_nginx_access_log_file }};
+    access_log {{ flask_nginx_access_log_file }} ssl_client;
     error_log {{ flask_nginx_error_log_file }};
 
     error_page 418 = @request_authorized;
