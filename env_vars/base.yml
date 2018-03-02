@@ -49,6 +49,7 @@ celery_num_workers: 2
 # (The production fingerprint must be used in prod, for obvious reasons)
 docusign_client_fingerprint: d2818c5263a98ca63ce0cad359f912736cc3a0ce
 
+cybersource_secret_key: "secret"
 cybersource_client_fingerprint: unknown_find_later
 
 root_crt: |
