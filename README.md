@@ -16,7 +16,8 @@ create a new virtual machine and provision it with Ansible, simply run:
 vagrant up
 ```
 
-After that, you will have a fully functional web server accessible at 192.168.33.15
+After that, you will have a fully functional web server accessible at
+https://mitoc-trips.local
 
 ### Development (`development.yml`)
 This playbook allows running all infrastructure an AWS. By default, it runs a
