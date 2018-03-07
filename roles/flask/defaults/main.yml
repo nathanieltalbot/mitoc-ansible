@@ -17,8 +17,10 @@ gunicorn_group: webapps
 
 
 # Nginx settings.
-flask_nginx_access_log_file: "{{ flask_application_log_dir }}/nginx_access.log"
-flask_nginx_error_log_file: "{{ flask_application_log_dir }}/nginx_error.log"
+api_access_log_file: "{{ flask_application_log_dir }}/api_nginx_access.log"
+api_error_log_file: "{{ flask_application_log_dir }}/api_nginx_error.log"
+mutual_tls_access_log_file: "{{ flask_application_log_dir }}/tls_nginx_access.log"
+mutual_tls_error_log_file: "{{ flask_application_log_dir }}/tls_nginx_error.log"
 
 
 # Flask environment variables.
