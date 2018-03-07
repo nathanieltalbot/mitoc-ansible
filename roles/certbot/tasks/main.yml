@@ -11,16 +11,21 @@
   service: name=nginx state=stopped
   when: nginx_status.stat.exists
 
-- name: Install certbot and generate cert
+- name: Generate cert for plain API server
   command: "{{ certbot_script }} certonly --noninteractive --agree-tos --standalone --email {{ certbot_admin_email }} -d {{ api_url }}"
   args:
-    creates: "{{ certbot_output_dir }}"
+    creates: "{{ certbot_output_dir }}/{{ api_url }}"
+
+- name: Generate cert for Mutual TLS server
+  command: "{{ certbot_script }} certonly --noninteractive --agree-tos --standalone --email {{ certbot_admin_email }} -d {{ mutual_tls_api_url }}"
+  args:
+    creates: "{{ certbot_output_dir }}/{{ mutual_tls_api_url }}"
 
 - name: Ensure Nginx is started
   service: name=nginx state=started
   when: nginx_status.stat.exists
 
-- name: Ensure a cron job to auto-renew the cert exists
+- name: Ensure a cron job to auto-renew the certs exists
   cron: name="daily auto renew cert"
         special_time=daily
         job="{{ certbot_script }} renew --standalone --no-self-upgrade --pre-hook \"service nginx stop\" --post-hook \"service nginx start\" --quiet"

@@ -6,7 +6,8 @@ nginx_strong_dh_group: yes  # Strongly recomended in production. See weakdh.org.
 nginx_use_letsencrypt: no
 
 # Only used when nginx_use_letsencrypt is set to yes/true. The 'certbot' role will automatically generate these files.
-letsencrypt_dir: "/etc/letsencrypt/live/{{ api_url }}"
+api_letsencrypt_dir: "/etc/letsencrypt/live/{{ api_url }}"
+mutual_tls_letsencrypt_dir: "/etc/letsencrypt/live/{{ mutual_tls_api_url }}"
 letsencrypt_cert_filename: fullchain.pem
 letsencrypt_privkey_filename: privkey.pem
 
