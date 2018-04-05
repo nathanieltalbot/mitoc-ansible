@@ -94,10 +94,19 @@ server {
     error_page 418 = @request_authorized;
 
     location /members/waiver {
-        if ($ssl_client_fingerprint != "{{ docusign_client_fingerprint }}") {
-          return 403;
+        # In April/May 2018, DocuSign is rotating to new certificates (valid until 2020-02-09)
+        # Allow this fingerprint in advance so we're ready for the swap
+        if ($ssl_client_fingerprint = "{{ docusign_client_fingerprint }}") {
+            return 418;
         }
-        return 418;
+
+        # During April and May of 2018, the old certificates can still be used!
+        # Since the exact rollover date is up to Docusign admins, we must also support the old
+        # (we can delete this section after 2018-05-23)
+        if ($ssl_client_fingerprint = "{{ old_docusign_client_fingerprint }}") {
+            return 418;
+        }
+        return 403;
     }
 
     location @request_authorized {
