@@ -6,25 +6,20 @@
     - nodejs-legacy
     - npm
   tags:
-    - bower
     - packages
 
-- name: Ensure Bower and JS+CSS compressors installed
+- name: Ensure JS+CSS compressors installed
   npm: name={{ item }} global=yes
   with_items:
-    - bower
     - uglify-js
     - yuglify
   tags:
-    - bower
     - packages
 
-- debug: msg="Running Bower in {{ project_path }}"
-  tags: bower
-
-- name: Run Bower Install
-  bower: path={{ project_path }}
-  tags: bower
+- name: Install dependencies with npm
+  npm:
+    path: "{{ project_path }}"
+    production: yes
 
 - name: Install packages required by the Django app inside virtualenv
   pip: virtualenv={{ virtualenv_path }} requirements={{ requirements_file }}
