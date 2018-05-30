@@ -49,10 +49,6 @@ celery_num_workers: 2
 # (The production fingerprint must be used in prod, for obvious reasons)
 docusign_client_fingerprint: 4f513c7089e3a6e4c47bceec321a6548b57ae969
 
-# This is the old SSL fingerprint. Because the swapover to new certificates is phased in,
-# it makes sense for us to allow either this fingerprint or the new one.
-old_docusign_client_fingerprint: d2818c5263a98ca63ce0cad359f912736cc3a0ce
-
 cybersource_secret_key: "secret"
 verify_cybersource_signature: "true"
 
