@@ -40,12 +40,15 @@
             backup=yes
   tags: deploy
 
-- name: Create the application log folder
-  file: path={{ application_log_dir }}
+- name: Create the application log folders
+  file: path={{ item }}
         owner={{ gunicorn_user }}
         group={{ gunicorn_group }}
         mode=0774
         state=directory
+  with_items:
+    - "{{ application_log_dir }}"
+    - "{{ ws_lottery_log_dir }}"
 
 - name: Create (or retain) the application log file
   copy: content=""
