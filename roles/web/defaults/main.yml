@@ -54,6 +54,7 @@ django_environment:
   OAUTH_JSON_CREDENTIALS: "{{ project_path }}/oauth_credentials.json"
   RAVEN_DSN: "{{ raven_dsn|default('') }}"
   WS_DJANGO_LOCAL: "{{ django_debug|default('') }}"
+  DJANGO_ALLOWED_HOST: "{{ inventory_hostname }}"
   EC2_IP: "{{ ec2_ip|default('') }}"
   DOCUSIGN_API_BASE: "{{ docusign_api_base|default('') }}"
   DOCUSIGN_USERNAME: "{{ docusign_username|default('') }}"
