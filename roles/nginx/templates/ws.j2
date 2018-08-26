@@ -27,8 +27,30 @@ server {
 
     add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; ";
 
+    # Disallow all content with the exception of:
+    # - Scripts served locally, inline, or on known CDN's
+    # - XHR's either locally, or to Sentry
+    # - Remote images (allowed on HTTP for now)
+    # - Local fonts
+    # NOTE: `report-uri` is deprecated, but `report-to` hasn't fully replaced it. To be forward and backward compatible, use both.
+    add_header Content-Security-Policy "default-src 'none'; font-src 'self'; connect-src 'self' https://sentry.io; img-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mitoc-trips.mit.edu https://cdnjs.cloudflare.com https://use.fontawesome.com https://ajax.googleapis.com;{% if security_header_endpoint %} report-uri {{ security_header_endpoint }} report-to {{ security_header_endpoint }};{% endif %}";
+
+    # There's no need to make use of the user's microphone, location, etc.
+    # (The Feature-Policy header doesn't suport blacklisting everything by default, so we must explicitly set none)
+    add_header Feature-Policy "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'none'; usb 'none'; vr 'none';";
+
+    # Prevent MIME type sniffing for security
+    add_header X-Content-Type-Options "nosniff";
+
+    # Enable XSS protection in case user's browser has disabled it
+    add_header X-XSS-Protection "1; mode=block";
+
     # Prevent loading in a frame (clickjacking defense)
     add_header X-Frame-Options "DENY";
+
+    # Don't leak referrerring URL when following external links
+    # (Django's CSRF validation requires referral info for forms to work)
+    add_header Referrer-Policy "same-origin";
 
     client_max_body_size 4G;
 

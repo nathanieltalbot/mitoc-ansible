@@ -13,3 +13,6 @@ letsencrypt_privkey_filename: privkey.pem
 
 flask_virtualenv_path: "/webapps/{{ flask_application_name }}"
 django_virtualenv_path: "/webapps/{{ django_application_name }}"
+
+# "Security Header Endpoint" from "Client Keys" in Sentry
+security_header_endpoint: null
