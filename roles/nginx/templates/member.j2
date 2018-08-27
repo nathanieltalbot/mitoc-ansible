@@ -19,6 +19,7 @@ upstream {{ flask_application_name }}_wsgi_server {
 server {
     listen              443;
     server_name         {{ api_url }};
+    server_tokens       off;
     ssl on;
     {% if nginx_use_letsencrypt %}
     ssl_certificate     {{ api_letsencrypt_dir }}/{{ letsencrypt_cert_filename }};
@@ -64,6 +65,7 @@ server {
 server {
     listen              443;
     server_name         {{ mutual_tls_api_url }};
+    server_tokens       off;
     ssl on;
     {% if nginx_use_letsencrypt %}
     ssl_certificate     {{ mutual_tls_letsencrypt_dir }}/{{ letsencrypt_cert_filename }};
