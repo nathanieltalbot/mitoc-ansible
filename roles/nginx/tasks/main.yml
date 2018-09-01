@@ -17,7 +17,7 @@
   notify: restart nginx
 
 - name: Ensure that a strong Diffie-Hellman group is used
-  command: openssl dhparam -out /etc/ssl/certs/dhparams.pem 2048 creates=/etc/ssl/certs/dhparams.pem
+  command: openssl dhparam -out /etc/ssl/certs/dhparams.pem 4096 creates=/etc/ssl/certs/dhparams.pem
   when: nginx_strong_dh_group is defined and nginx_strong_dh_group
 
 - name: Create the Nginx configuration files
