@@ -62,3 +62,4 @@ django_environment:
   DOCUSIGN_PASSWORD: "{{ docusign_password|default('') }}"
   DOCUSIGN_INTEGRATOR_KEY: "{{ docusign_integrator_key|default('') }}"
   DOCUSIGN_WAIVER_TEMPLATE_ID: "{{ docusign_waiver_template_id|default('') }}"
+  BURSAR_NAME: "{{ mitoc_bursar_name|default('MITOC Bursar') }}"
