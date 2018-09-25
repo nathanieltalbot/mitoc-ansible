@@ -1,1 +1,198 @@
-REDACTED
+---
+
+git_branch: master
+
+# IP address of EC2 instance serving MITOC Trips
+# (encrypted for security in case we ever serve traffic behind an ELB)
+ec2_ip: REDACTED
+
+mitoc_bursar_name: "Hannah Varner"
+
+
+# MITOC Trips database settings.
+db_host: REDACTED
+db_password: REDACTED
+master_db_password: REDACTED
+
+
+# Gear database credentials (for querying current membership status)
+gear_db_host: REDACTED
+gear_db_user: REDACTED
+gear_db_password: REDACTED
+gear_db_name: REDACTED
+
+# Credentials for gear database when we migrate over to Postgres
+# (These currently aren't used in production)
+pg_gear_db_host: REDACTED
+pg_gear_db_user: REDACTED
+pg_gear_db_password: REDACTED
+pg_gear_db_name: REDACTED
+
+
+# Served to clients for reporting Content Security Policy violations
+security_header_endpoint: "https://sentry.io/api/104648/security/?sentry_key=8ca35907a538416cbfad696d187acdc0"
+# Used privately in Python source for reporting server-side violations
+raven_dsn: REDACTED
+flask_raven_dsn: REDACTED
+
+
+# DocuSign settings
+docusign_api_base: "https://www.docusign.net/restapi/v2/"
+docusign_waiver_template_id: "37d0d069-e7f5-40d1-a958-98ece9cef411"
+docusign_username: REDACTED
+docusign_password: REDACTED
+docusign_integrator_key: REDACTED
+
+# This is the SSL fingerprint of the DocuSign Connect certificate, obtained by:
+#     openssl x509 -in <cert> -noout -fingerprint
+# Certificates are available at:
+# https://trust.docusign.com/en-us/trust-certifications/docusign-public-certificates/
+docusign_client_fingerprint: 70d6116636eef6a32ef196b8e6d86fb17cffacaa
+
+
+# CyberSource settings
+verify_cybersource_signature: "false"  # Will rely on IP check
+
+
+# Google API settings
+# oauth_client_email: mitoc-discounts@appspot.gserviceaccount.com
+# oauth_client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/mitoc-discounts%40appspot.gserviceaccount.com
+oauth_private_key_id: REDACTED
+
+oauth_private_key: REDACTED
+
+
+# SES settings
+ses_user: REDACTED
+ses_password: REDACTED
+
+
+# Setting this to 1 will restart the Gunicorn process each time
+# you make a request, basically reloading the code. Very handy
+# when developing. Set to 0 for unlimited requests (default).
+gunicorn_max_requests: 0
+
+
+# RabbitMQ settings.
+rabbitmq_admin_user: REDACTED
+rabbitmq_admin_password: REDACTED
+rabbitmq_application_password: REDACTED
+
+
+# Nginx settings
+nginx_server_name: mitoc-trips.mit.edu
+api_url: api.mitoc.org
+mutual_tls_api_url: docusign.mitoc.org
+nginx_strong_dh_group: yes
+nginx_use_letsencrypt: yes
+
+
+# Application settings
+django_secret_key: REDACTED
+membership_secret_key: REDACTED
+
+
+# Public certificate for mitoc-trips.mit.edu
+ssl_crt: |
+  -----BEGIN CERTIFICATE-----
+  MIIFoTCCBImgAwIBAgIQTJt03ULUp0HjvhCDT0NeIzANBgkqhkiG9w0BAQsFADB2
+  MQswCQYDVQQGEwJVUzELMAkGA1UECBMCTUkxEjAQBgNVBAcTCUFubiBBcmJvcjES
+  MBAGA1UEChMJSW50ZXJuZXQyMREwDwYDVQQLEwhJbkNvbW1vbjEfMB0GA1UEAxMW
+  SW5Db21tb24gUlNBIFNlcnZlciBDQTAeFw0xNjA1MjQwMDAwMDBaFw0xOTA1MjQy
+  MzU5NTlaMIHXMQswCQYDVQQGEwJVUzEOMAwGA1UEERMFMDIxMzkxCzAJBgNVBAgT
+  Ak1hMRIwEAYDVQQHEwlDYW1icmlkZ2UxHTAbBgNVBAkTFDc3IE1hc3NhY2h1c2V0
+  dHMgQXZlMS4wLAYDVQQKEyVNYXNzYWNodXNldHRzIEluc3RpdHV0ZSBvZiBUZWNo
+  bm9sb2d5MSowKAYDVQQLDCFJbmZvcm1hdGlvbiBTZXJ2aWNlcyAmIFRlY2hub2xv
+  Z3kxHDAaBgNVBAMTE21pdG9jLXRyaXBzLm1pdC5lZHUwggEiMA0GCSqGSIb3DQEB
+  AQUAA4IBDwAwggEKAoIBAQC7d2g4943bQh/zq2h3ucu8VOPtCzb9WCAn/pnydWOd
+  eZiAgCKwHwazD8bpuNs8suba8fnsVIxnHhR3YZB0jVrwXzE2bdVNCNKIRJSNGwHk
+  glT2tdxYL9X5YzozhxMFAD0LcM8rX+gIZyyzcWJDexgNsrqQ/raLGTfX7kanX5Fr
+  t7cjoWqD1C4cQfvrYY1+lA5FrngmM/r2dJZ7tggZKpXOSLClkuxp1Cea8wZXuRcC
+  l7gV8OYWLzst6kQETdmyazsRfBE4hCIY4a9sLusHxK1uejwibp08FpwIyuxMVrTm
+  TJJMCmyBl2h0K4uPZpvMJjcv+VHlaovO2D6S5QmBUQMFAgMBAAGjggHHMIIBwzAf
+  BgNVHSMEGDAWgBQeBaN3j2yW4luHS6a0hqxxAAznODAdBgNVHQ4EFgQUrOwJKGeL
+  ysNiGXtuyAj2EOndCkgwDgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwHQYD
+  VR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMGcGA1UdIARgMF4wUgYMKwYBBAGu
+  IwEEAwEBMEIwQAYIKwYBBQUHAgEWNGh0dHBzOi8vd3d3LmluY29tbW9uLm9yZy9j
+  ZXJ0L3JlcG9zaXRvcnkvY3BzX3NzbC5wZGYwCAYGZ4EMAQICMEQGA1UdHwQ9MDsw
+  OaA3oDWGM2h0dHA6Ly9jcmwuaW5jb21tb24tcnNhLm9yZy9JbkNvbW1vblJTQVNl
+  cnZlckNBLmNybDB1BggrBgEFBQcBAQRpMGcwPgYIKwYBBQUHMAKGMmh0dHA6Ly9j
+  cnQudXNlcnRydXN0LmNvbS9JbkNvbW1vblJTQVNlcnZlckNBXzIuY3J0MCUGCCsG
+  AQUFBzABhhlodHRwOi8vb2NzcC51c2VydHJ1c3QuY29tMB4GA1UdEQQXMBWCE21p
+  dG9jLXRyaXBzLm1pdC5lZHUwDQYJKoZIhvcNAQELBQADggEBAJqVRumlnfrVkE9m
+  WMZ7Ol71Y0hyYxfBikL4LIRwG4RXkOTId5FgU9WG28IUpM8c+GiD+cIWFtnFA1XC
+  tsvLrKiB+/hw8E3H7VK16FNlATrtFlmKmX0Lzxoth2n9yrKSBsMZdNIjv9d5QObz
+  OmAKrChPGKxpj5T+vF5kJBjBvfIXY+BOQZ7u9mfygB3lP8fO2xfkEi2FNBclVjYE
+  0Nj+i0/WQXbI0hqfH/YP4W1hIArIJFfSGTf1jPYque20PMIbJC59KQC5xIWsVE5g
+  ProK+j5WSzbAhEAUmA/UO2Je1x/QiWqtRNX3pWZZKaR2jO9H99hQtIjJ7zn4AzZ1
+  5yfOhx0=
+  -----END CERTIFICATE-----
+  -----BEGIN CERTIFICATE-----
+  MIIF+TCCA+GgAwIBAgIQRyDQ+oVGGn4XoWQCkYRjdDANBgkqhkiG9w0BAQwFADCB
+  iDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCk5ldyBKZXJzZXkxFDASBgNVBAcTC0pl
+  cnNleSBDaXR5MR4wHAYDVQQKExVUaGUgVVNFUlRSVVNUIE5ldHdvcmsxLjAsBgNV
+  BAMTJVVTRVJUcnVzdCBSU0EgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNMTQx
+  MDA2MDAwMDAwWhcNMjQxMDA1MjM1OTU5WjB2MQswCQYDVQQGEwJVUzELMAkGA1UE
+  CBMCTUkxEjAQBgNVBAcTCUFubiBBcmJvcjESMBAGA1UEChMJSW50ZXJuZXQyMREw
+  DwYDVQQLEwhJbkNvbW1vbjEfMB0GA1UEAxMWSW5Db21tb24gUlNBIFNlcnZlciBD
+  QTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJwb8bsvf2MYFVFRVA+e
+  xU5NEFj6MJsXKZDmMwysE1N8VJG06thum4ltuzM+j9INpun5uukNDBqeso7JcC7v
+  HgV9lestjaKpTbOc5/MZNrun8XzmCB5hJ0R6lvSoNNviQsil2zfVtefkQnI/tBPP
+  iwckRR6MkYNGuQmm/BijBgLsNI0yZpUn6uGX6Ns1oytW61fo8BBZ321wDGZq0GTl
+  qKOYMa0dYtX6kuOaQ80tNfvZnjNbRX3EhigsZhLI2w8ZMA0/6fDqSl5AB8f2IHpT
+  eIFken5FahZv9JNYyWL7KSd9oX8hzudPR9aKVuDjZvjs3YncJowZaDuNi+L7RyML
+  fzcCAwEAAaOCAW4wggFqMB8GA1UdIwQYMBaAFFN5v1qqK0rPVIDh2JvAnfKyA2bL
+  MB0GA1UdDgQWBBQeBaN3j2yW4luHS6a0hqxxAAznODAOBgNVHQ8BAf8EBAMCAYYw
+  EgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUH
+  AwIwGwYDVR0gBBQwEjAGBgRVHSAAMAgGBmeBDAECAjBQBgNVHR8ESTBHMEWgQ6BB
+  hj9odHRwOi8vY3JsLnVzZXJ0cnVzdC5jb20vVVNFUlRydXN0UlNBQ2VydGlmaWNh
+  dGlvbkF1dGhvcml0eS5jcmwwdgYIKwYBBQUHAQEEajBoMD8GCCsGAQUFBzAChjNo
+  dHRwOi8vY3J0LnVzZXJ0cnVzdC5jb20vVVNFUlRydXN0UlNBQWRkVHJ1c3RDQS5j
+  cnQwJQYIKwYBBQUHMAGGGWh0dHA6Ly9vY3NwLnVzZXJ0cnVzdC5jb20wDQYJKoZI
+  hvcNAQEMBQADggIBAC0RBjjW29dYaK+qOGcXjeIT16MUJNkGE+vrkS/fT2ctyNMU
+  11ZlUp5uH5gIjppIG8GLWZqjV5vbhvhZQPwZsHURKsISNrqOcooGTie3jVgU0W+0
+  +Wj8mN2knCVANt69F2YrA394gbGAdJ5fOrQmL2pIhDY0jqco74fzYefbZ/VS29fR
+  5jBxu4uj1P+5ZImem4Gbj1e4ZEzVBhmO55GFfBjRidj26h1oFBHZ7heDH1Bjzw72
+  hipu47Gkyfr2NEx3KoCGMLCj3Btx7ASn5Ji8FoU+hCazwOU1VX55mKPU1I2250Lo
+  RCASN18JyfsD5PVldJbtyrmz9gn/TKbRXTr80U2q5JhyvjhLf4lOJo/UzL5WCXED
+  Smyj4jWG3R7Z8TED9xNNCxGBMXnMete+3PvzdhssvbORDwBZByogQ9xL2LUZFI/i
+  eoQp0UM/L8zfP527vWjEzuDN5xwxMnhi+vCToh7J159o5ah29mP+aJnvujbXEnGa
+  nrNxHzu+AGOePV8hwrGGG7hOIcPDQwkuYwzN/xT29iLp/cqf9ZhEtkGcQcIImH3b
+  oJ8ifsCnSbu0GB9L06Yqh7lcyvKDTEADslIaeSEINxhO2Y1fmcYFX/Fqrrp1WnhH
+  OjplXuXE0OPa0utaKC25Aplgom88L2Z8mEWcyfoB7zKOfD759AN7JKZWCYwk
+  -----END CERTIFICATE-----
+  -----BEGIN CERTIFICATE-----
+  MIIFdzCCBF+gAwIBAgIQE+oocFv07O0MNmMJgGFDNjANBgkqhkiG9w0BAQwFADBv
+  MQswCQYDVQQGEwJTRTEUMBIGA1UEChMLQWRkVHJ1c3QgQUIxJjAkBgNVBAsTHUFk
+  ZFRydXN0IEV4dGVybmFsIFRUUCBOZXR3b3JrMSIwIAYDVQQDExlBZGRUcnVzdCBF
+  eHRlcm5hbCBDQSBSb290MB4XDTAwMDUzMDEwNDgzOFoXDTIwMDUzMDEwNDgzOFow
+  gYgxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpOZXcgSmVyc2V5MRQwEgYDVQQHEwtK
+  ZXJzZXkgQ2l0eTEeMBwGA1UEChMVVGhlIFVTRVJUUlVTVCBOZXR3b3JrMS4wLAYD
+  VQQDEyVVU0VSVHJ1c3QgUlNBIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MIICIjAN
+  BgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAgBJlFzYOw9sIs9CsVw127c0n00yt
+  UINh4qogTQktZAnczomfzD2p7PbPwdzx07HWezcoEStH2jnGvDoZtF+mvX2do2NC
+  tnbyqTsrkfjib9DsFiCQCT7i6HTJGLSR1GJk23+jBvGIGGqQIjy8/hPwhxR79uQf
+  jtTkUcYRZ0YIUcuGFFQ/vDP+fmyc/xadGL1RjjWmp2bIcmfbIWax1Jt4A8BQOujM
+  8Ny8nkz+rwWWNR9XWrf/zvk9tyy29lTdyOcSOk2uTIq3XJq0tyA9yn8iNK5+O2hm
+  AUTnAU5GU5szYPeUvlM3kHND8zLDU+/bqv50TmnHa4xgk97Exwzf4TKuzJM7UXiV
+  Z4vuPVb+DNBpDxsP8yUmazNt925H+nND5X4OpWaxKXwyhGNVicQNwZNUMBkTrNN9
+  N6frXTpsNVzbQdcS2qlJC9/YgIoJk2KOtWbPJYjNhLixP6Q5D9kCnusSTJV882sF
+  qV4Wg8y4Z+LoE53MW4LTTLPtW//e5XOsIzstAL81VXQJSdhJWBp/kjbmUZIO8yZ9
+  HE0XvMnsQybQv0FfQKlERPSZ51eHnlAfV1SoPv10Yy+xUGUJ5lhCLkMaTLTwJUdZ
+  +gQek9QmRkpQgbLevni3/GcV4clXhB4PY9bpYrrWX1Uu6lzGKAgEJTm4Diup8kyX
+  HAc/DVL17e8vgg8CAwEAAaOB9DCB8TAfBgNVHSMEGDAWgBStvZh6NLQm9/rEJlTv
+  A73gJMtUGjAdBgNVHQ4EFgQUU3m/WqorSs9UgOHYm8Cd8rIDZsswDgYDVR0PAQH/
+  BAQDAgGGMA8GA1UdEwEB/wQFMAMBAf8wEQYDVR0gBAowCDAGBgRVHSAAMEQGA1Ud
+  HwQ9MDswOaA3oDWGM2h0dHA6Ly9jcmwudXNlcnRydXN0LmNvbS9BZGRUcnVzdEV4
+  dGVybmFsQ0FSb290LmNybDA1BggrBgEFBQcBAQQpMCcwJQYIKwYBBQUHMAGGGWh0
+  dHA6Ly9vY3NwLnVzZXJ0cnVzdC5jb20wDQYJKoZIhvcNAQEMBQADggEBAJNl9jeD
+  lQ9ew4IcH9Z35zyKwKoJ8OkLJvHgwmp1ocd5yblSYMgpEg7wrQPWCcR23+WmgZWn
+  RtqCV6mVksW2jwMibDN3wXsyF24HzloUQToFJBv2FAY7qCUkDrvMKnXduXBBP3zQ
+  YzYhBx9G/2CkkeFnvN4ffhkUyWNnkepnB2u0j4vAbkN9w6GAbLIevFOFfdyQoaS8
+  Le9Gclc1Bb+7RrtubTeZtv8jkpHGbkD4jylW6l/VXxRTrPBPYer3IsynVgviuDQf
+  Jtl7GQVoP7o81DgGotPmjw7jtHFtQELFhLRAlSv0ZaBIefYdgWOWnU914Ph85I6p
+  0fKtirOMxyHNwu8=
+  -----END CERTIFICATE-----
+
+# Private key for mitoc-trips.mit.edu
+ssl_key: REDACTED
