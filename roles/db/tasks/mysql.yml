@@ -16,7 +16,8 @@
   service: name=mysql state=started enabled=yes
 
 - name: update MySQL root password from the blank default
-  sudo: yes
+  become: yes
+  become_user: root
   mysql_user: name=root
               host="{{ gear_db_host }}"
               password="{{ mysql_root_password }}"
