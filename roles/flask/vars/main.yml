@@ -1,5 +1,3 @@
 ---
 
-# Override otherwise global settings for using Python 2.7
-enable_deadsnakes_ppa: yes
 recreate_virtualenv: no

@@ -3,7 +3,7 @@
 - name: Make sure the latest npm is installed
   apt: name={{ item }} state=latest
   with_items:
-    - nodejs-legacy
+    - nodejs
     - npm
   tags:
     - packages
