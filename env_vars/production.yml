@@ -61,6 +61,11 @@ oauth_private_key_id: REDACTED
 
 oauth_private_key: REDACTED
 
+# Express these variables again so that they can be JSON serialized
+# (to_json will not work on encrypted variables - it serializes the encrypted string!)
+oauth_config:
+  private_key_id: "{{ oauth_private_key_id }}"
+  private_key: "{{ oauth_private_key }}"
 
 # SES settings
 ses_user: REDACTED

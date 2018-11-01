@@ -30,7 +30,7 @@
             owner=root
             group=root
             mode=0400
-  when: oauth_private_key is defined
+  when: oauth_config is defined
 
 - name: Run Django database migrations
   django_manage:
