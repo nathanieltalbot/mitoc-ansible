@@ -29,7 +29,7 @@
             dest={{ project_path }}/oauth_credentials.json
             owner=root
             group=root
-            mode=0400
+            mode=0440
   when: oauth_config is defined
 
 - name: Run Django database migrations
