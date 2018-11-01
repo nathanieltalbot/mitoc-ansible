@@ -19,6 +19,8 @@
 - name: Ensure that a strong Diffie-Hellman group is used
   command: openssl dhparam -out /etc/ssl/certs/dhparams.pem 4096 creates=/etc/ssl/certs/dhparams.pem
   when: nginx_strong_dh_group is defined and nginx_strong_dh_group
+  async: 2700  # Wait up to 45 minutes!
+  poll: 30  # Poll every 30 seconds until complete
 
 - name: Create the Nginx configuration files
   template: src={{ item }}.j2
