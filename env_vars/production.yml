@@ -3,8 +3,7 @@
 git_branch: master
 
 # IP address of EC2 instance serving MITOC Trips
-# (encrypted for security in case we ever serve traffic behind an ELB)
-ec2_ip: REDACTED
+ec2_ip: 34.207.93.27
 
 mitoc_bursar_name: "Hannah Varner"
 
