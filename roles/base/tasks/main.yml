@@ -4,6 +4,14 @@
   when: create_swap_file
   tags: swap
 
+- name: Configure SSH
+  template: src=sshd_config.j2
+            dest=/etc/ssh/sshd_config
+            mode=0644
+            backup=yes
+  notify:
+    - restart ssh
+
 - name: Install security updates
   apt: default_release={{ ansible_distribution_release }}-security
        update_cache={{ update_apt_cache }}
