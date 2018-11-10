@@ -12,11 +12,11 @@ db_password: password
 gunicorn_max_requests: 1
 
 # Docusign settings
-docusign_api_base: ''https://demo.docusign.net/restapi/v2/''
+docusign_api_base: "https://demo.docusign.net/restapi/v2/"
 docusign_username: "outing-club-docusign-api@mit.edu"
 docusign_password: "secret"
 docusign_integrator_key: "secret"
-docusign_waiver_template_id: "ea6f5413-6951-4a20-b9eb-3cb54765b32e"
+docusign_waiver_template_id: "0b18b218-6d8c-4614-89c9-1634714a5e42"
 
 
 # RabbitMQ settings.

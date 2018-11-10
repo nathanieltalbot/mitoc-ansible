@@ -37,7 +37,7 @@ flask_raven_dsn: REDACTED
 
 # DocuSign settings
 docusign_api_base: "https://www.docusign.net/restapi/v2/"
-docusign_waiver_template_id: "37d0d069-e7f5-40d1-a958-98ece9cef411"
+docusign_waiver_template_id: "ce1ea05f-cea0-4f60-ab70-0464baf7b600"
 docusign_username: REDACTED
 docusign_password: REDACTED
 docusign_integrator_key: REDACTED
