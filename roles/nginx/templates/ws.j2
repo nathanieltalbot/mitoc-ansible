@@ -14,10 +14,9 @@ server {
 }
 
 server {
-    listen              443;
+    listen              443 ssl;
     server_name         {{ nginx_server_name }};
     server_tokens off;
-    ssl on;
     ssl_certificate     {{ nginx_ssl_dest_dir }}/{{ root_name }}.crt;
     ssl_certificate_key {{ nginx_ssl_dest_dir }}/{{ root_name }}.key;
     ssl_protocols       TLSv1.2 TLSv1.3;

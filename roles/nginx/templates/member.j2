@@ -17,10 +17,9 @@ upstream {{ flask_application_name }}_wsgi_server {
 
 # This API is open to the public (individual locations may implement other access control)
 server {
-    listen              443;
+    listen              443 ssl;
     server_name         {{ api_url }};
     server_tokens       off;
-    ssl on;
     {% if nginx_use_letsencrypt %}
     ssl_certificate     {{ api_letsencrypt_dir }}/{{ letsencrypt_cert_filename }};
     ssl_certificate_key {{ api_letsencrypt_dir }}/{{ letsencrypt_privkey_filename }};
@@ -68,10 +67,9 @@ server {
 
 # This API requires mutual TLS
 server {
-    listen              443;
+    listen              443 ssl;
     server_name         {{ mutual_tls_api_url }};
     server_tokens       off;
-    ssl on;
     {% if nginx_use_letsencrypt %}
     ssl_certificate     {{ mutual_tls_letsencrypt_dir }}/{{ letsencrypt_cert_filename }};
     ssl_certificate_key {{ mutual_tls_letsencrypt_dir }}/{{ letsencrypt_privkey_filename }};
