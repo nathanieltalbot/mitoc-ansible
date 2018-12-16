@@ -1,9 +1,9 @@
 ---
 git_repo: https://github.com/DavidCain/mitoc-trips.git
-setup_git_repo: yes
+setup_git_repo: true
 
 # Virtualenv settings.
-recreate_virtualenv: yes
+recreate_virtualenv: true
 virtualenv_python_version: python3.6
 
 

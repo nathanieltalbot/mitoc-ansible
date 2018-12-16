@@ -1,6 +1,6 @@
 ---
 flask_git_repo: https://github.com/DavidCain/mitoc-member
-setup_git_repo: yes
+setup_git_repo: true
 
 # Application settings.
 virtualenv_python_version: python3.6

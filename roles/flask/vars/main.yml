@@ -1,3 +1,3 @@
 ---
 
-recreate_virtualenv: no
+recreate_virtualenv: false

@@ -24,7 +24,7 @@
   service: name=postgresql state=started enabled=yes
 
 - name: Ensure databases are created
-  become: yes
+  become: true
   become_user: postgres
   postgresql_db: name={{ item }}
                  encoding='UTF-8'
@@ -37,7 +37,7 @@
     - "{{ auth_db_name }}"
 
 - name: Ensure user has access to the database
-  become: yes
+  become: true
   become_user: postgres
   postgresql_user: db={{ item }}
                    name={{ db_user }}
@@ -50,7 +50,7 @@
     - "{{ auth_db_name }}"
 
 - name: Ensure user does not have unnecessary privileges
-  become: yes
+  become: true
   become_user: postgres
   postgresql_user: name={{ db_user }}
                    role_attr_flags=NOSUPERUSER,NOCREATEDB

@@ -87,8 +87,8 @@ rabbitmq_application_password: REDACTED
 nginx_server_name: mitoc-trips.mit.edu
 api_url: api.mitoc.org
 mutual_tls_api_url: docusign.mitoc.org
-nginx_strong_dh_group: yes
-nginx_use_letsencrypt: yes
+nginx_strong_dh_group: true
+nginx_use_letsencrypt: true
 
 
 # Application settings

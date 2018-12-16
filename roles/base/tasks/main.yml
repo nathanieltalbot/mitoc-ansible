@@ -4,11 +4,17 @@
   when: create_swap_file
   tags: swap
 
+- name: Check if SSH configured on host
+  stat:
+    path: "/etc/ssh"
+  register: ssh_configured
+
 - name: Configure SSH
   template: src=sshd_config.j2
             dest=/etc/ssh/sshd_config
             mode=0644
             backup=yes
+  when: ssh_configured.stat.exists
   notify:
     - restart ssh
 

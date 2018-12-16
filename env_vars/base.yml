@@ -10,7 +10,6 @@ flask_project_name: mitoc-member
 flask_application_name: member
 
 
-
 # Database settings.
 # Hard-coded as the application name, but this is how it's configured on RDS
 db_user: "ws"
@@ -24,9 +23,9 @@ rabbitmq_server_name: "{{ inventory_hostname }}"
 broker_url: "amqp://{{ rabbitmq_application_user }}:{{ rabbitmq_application_password }}@localhost/{{ rabbitmq_application_vhost }}"
 
 # Application settings
-run_django_db_migrations: yes
-run_django_collectstatic: yes
-django_settings_file: "{{ django_application_name }}.settings" # Dev/prod determined by envvar
+run_django_db_migrations: true
+run_django_collectstatic: true
+django_settings_file: "{{ django_application_name }}.settings"  # Dev/prod determined by envvar
 
 
 # Worker settings

@@ -1,7 +1,7 @@
 ---
 
-- name: Make sure the latest npm is installed
-  apt: name={{ item }} state=latest
+- name: Make sure the npm is installed
+  apt: name={{ item }} state=present
   with_items:
     - nodejs
     - npm
@@ -19,7 +19,7 @@
 - name: Install dependencies with npm
   npm:
     path: "{{ project_path }}"
-    production: yes
+    production: true
 
 - name: Install packages required by the Django app inside virtualenv
   pip: virtualenv={{ virtualenv_path }} requirements={{ requirements_file }}

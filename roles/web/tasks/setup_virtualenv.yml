@@ -49,16 +49,45 @@
     - "{{ application_log_dir }}"
     - "{{ ws_lottery_log_dir }}"
 
+- name: Check for an existing application logfile
+  stat:
+    path: "{{ application_log_file }}"
+  register: p
+
 - name: Create (or retain) the application log file
-  copy: content=""
-        dest={{ item }}
-        owner={{ gunicorn_user }}
-        group={{ gunicorn_group }}
-        mode=0664
-        force=no
-  with_items:
-    - "{{ application_log_file }}"
-    - "{{ django_log_file }}"
+  # Removing until https://github.com/ansible/ansible/issues/45530 gets resolved.
+  # copy: content=""
+  #       dest={{ application_log_file }}
+  #       owner={{ gunicorn_user }}
+  #       group={{ gunicorn_group }}
+  #       mode=0664
+  #       force=no
+  file:
+    path: "{{ application_log_file }}"
+    owner: "{{ gunicorn_user }}"
+    group: "{{ gunicorn_group }}"
+    mode: 0664
+    state: '{{ "file" if  p.stat.exists else "touch" }}'
+
+- name: Check for an existing Django logfile
+  stat:
+    path: "{{ django_log_file }}"
+  register: q
+
+- name: Create (or retain) the Django log file
+  # Removing until https://github.com/ansible/ansible/issues/45530 gets resolved.
+  # copy: content=""
+  #       dest={{ django_log_file }}
+  #       owner={{ gunicorn_user }}
+  #       group={{ gunicorn_group }}
+  #       mode=0664
+  #       force=no
+  file:
+    path: "{{ django_log_file }}"
+    owner: "{{ gunicorn_user }}"
+    group: "{{ gunicorn_group }}"
+    mode: 0664
+    state: '{{ "file" if  q.stat.exists else "touch" }}'
 
 - name: Create the virtualenv postactivate script to set environment variables
   template: src=virtualenv_postactivate.j2

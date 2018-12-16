@@ -2,12 +2,12 @@
 
 - name: Configure an instance running the MITOC Trips infrastructure
   hosts: all
-  become: yes
+  become: true
   become_user: root
   remote_user: ubuntu
   vars:
-    - setup_git_repo: yes
-    - update_apt_cache: yes
+    - setup_git_repo: true
+    - update_apt_cache: true
   vars_files:
     - env_vars/base.yml
     - env_vars/production.yml
