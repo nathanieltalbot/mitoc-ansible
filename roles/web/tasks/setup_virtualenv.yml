@@ -58,7 +58,7 @@
         force=no
   with_items:
     - "{{ application_log_file }}"
-    - "{{ django_error_file }}"
+    - "{{ django_log_file }}"
 
 - name: Create the virtualenv postactivate script to set environment variables
   template: src=virtualenv_postactivate.j2
