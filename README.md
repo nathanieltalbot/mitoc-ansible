@@ -1,7 +1,11 @@
+[![Build Status](https://travis-ci.com/DavidCain/mitoc-ansible.svg?branch=master)](https://travis-ci.com/DavidCain/mitoc-ansible)
+
 # MITOC Ansible
 
-This is a collection of Ansible playbooks used in the deployment of the MITOC
-Trips web site. The project allows local development on a setup closely mirroring 
+This is a collection of Ansible playbooks used in the deployment of the [MITOC
+Trips web site][mitoc-trips], [MITOC membership & waiver
+processing][mitoc-member], and related infrastructure.
+The project allows local development on a setup closely mirroring
 that of production as well as a streamlined way to deploy changes.
 
 ## Environments
@@ -56,7 +60,8 @@ not limited to):
 It also uses some more time-intensive plays that wouldn't be necessary in development
 (for example - generating a [strong Diffie-Hellman group][weakdh]).
 
-For obvious reasons, this file is encrypted using Ansible vault.
+For obvious reasons, secrets within this file are encrypted using Ansible
+vault's [`encrypt_string`][encrypt-string].
 
 In the public version of this repository, I have used `git filter-branch` to
 completely remove this sensitive file:
@@ -73,7 +78,8 @@ ansible-playbook -i hosts production.yml -u ubuntu --private-key=<path_to_iam_us
 
 
 ## History
-The repository was modified from Johnathan Calazan's [ansible-django-stack][ansible-django-stack].
+The repository is a modified fork of Johnathan Calazan's
+[ansible-django-stack][ansible-django-stack].
 
 ## Included services
 - Nginx
@@ -87,4 +93,8 @@ The repository was modified from Johnathan Calazan's [ansible-django-stack][ansi
 [aws-credentials]: http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#config-settings-and-precedence
 [aws-keypairs]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 [ansible-django-stack]: https://github.com/jcalazan/ansible-django-stack
+[encrypt-string]: https://docs.ansible.com/ansible/latest/user_guide/vault.html?highlight=encrypt_string#use-encrypt-string-to-create-encrypted-variables-to-embed-in-yaml
 [weakdh]: https://weakdh.org/sysadmin.html
+
+[mitoc-member]: https://github.com/DavidCain/mitoc-member
+[mitoc-trips]: https://github.com/DavidCain/mitoc-trips
