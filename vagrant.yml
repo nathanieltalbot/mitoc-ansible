@@ -13,6 +13,7 @@
     - env_vars/vagrant.yml
 
   roles:
+    - security
     - base
     - avahi
     - db

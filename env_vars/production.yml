@@ -7,6 +7,13 @@ ec2_ip: 34.207.93.27
 
 mitoc_bursar_name: "Hannah Varner"
 
+# Security settings
+# No need to have our own firewall - port access is controlled in AWS
+enable_ufw: false
+# We've manually configured SSH
+force_ssh_authentication: false
+use_more_restrictive_sshd_config: true
+
 
 # MITOC Trips database settings.
 db_host: REDACTED
