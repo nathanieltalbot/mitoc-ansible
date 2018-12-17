@@ -52,7 +52,7 @@ not limited to):
 
 - The Django `SECRET_KEY`
 - Full SSL certificate for mitoc-trips.mit.edu
-- Usernames, hostnames, and passwords for various services
+- Usernames, hostnames, and passwords for various services, including:
     - RabbitMQ
     - Postgres
     - SES
@@ -64,10 +64,31 @@ For obvious reasons, secrets within this file are encrypted using Ansible
 vault's [`encrypt_string`][encrypt-string].
 
 In the public version of this repository, I have used `git filter-branch` to
-completely remove this sensitive file:
+redact encrypted secrets (if we make the encrypted secrets open source, one could
+theoretically brute-force the Ansible-vault password).
 
-```bash
-git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch env_vars/production.yml' --tag-name-filter cat -- --all
+This repository originally used `ansible-vault` to encrypt entire files, but
+later transitioned to using [`encrypt_string`][encrypt-string]. The following
+multi-line regular expression substitution can redact both types of secret
+storage in Git history:
+
+```
+# When !vault is present, it indicates output from `encrypt_string`.
+# When !vault is absent, we're matching (and replacing) an entire file encrypted with Ansible-vault
+regex='(!vault \|\n)?'
+
+# The `$ANSIBLE_VAULT` string indicates encrypted contents from `ansible-vault`.
+# The capture group includes the version and the algorithm used for encryption
+regex+='\s*\$ANSIBLE_VAULT;(.*)'
+
+# All lines following `$ANSIBLE_VAULT` are output from Python's `hexify()`
+regex+='(\n\s*[0-9a-f]+)*'
+
+# Finally, we capture the final newline
+regex+='\n'
+
+# Any encrypted content is replaced, inline, with 'REDACTED'
+perl -0777 -i -pe "s/$regex/REDACTED\n/g" $1;
 ```
 
 Production (an EC2 instance running Ubuntu server) is deployed directly with Ansible:
