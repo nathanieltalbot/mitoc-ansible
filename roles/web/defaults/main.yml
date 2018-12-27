@@ -33,6 +33,7 @@ nginx_media_dir: "{{ virtualenv_path }}/media/"
 django_environment:
   DJANGO_SETTINGS_MODULE: "{{ django_settings_file }}"
   DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+  PRNG_SEED_SECRET: "{{ prng_seed_secret }}"
   MEMBERSHIP_SECRET_KEY: "{{ membership_secret_key }}"
   DJANGO_LOG_FILE: "{{ django_log_file }}"
   WS_LOTTERY_LOG_DIR: "{{ ws_lottery_log_dir }}"

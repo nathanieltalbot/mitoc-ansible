@@ -100,6 +100,7 @@ nginx_use_letsencrypt: true
 
 # Application settings
 django_secret_key: REDACTED
+prng_seed_secret: REDACTED
 membership_secret_key: REDACTED
 
 

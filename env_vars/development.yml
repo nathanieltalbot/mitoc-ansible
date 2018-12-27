@@ -32,6 +32,7 @@ celery_num_workers: 2
 
 # Application settings.
 django_secret_key: "akr2icmg1n8%z^3fe3c+)5d0(t^cy-2_25rrl35a7@!scna^1#"
+prng_seed_secret: "7f0025c5fe6152392031fc9ae5e0a976318b379e44d768d72ad"
 membership_secret_key: "d93afbdf8c81d14c4e9028b9759a8cfe9b"
 
 
