@@ -15,6 +15,12 @@ force_ssh_authentication: false
 use_more_restrictive_sshd_config: true
 
 
+# Something about our django-pipeline configuration requires too much CPU
+# Trying to run `collectstatic` on the remote host will crash the server
+# (Instead, we'll collect assets locally and sync to the server)
+run_django_collectstatic: false
+
+
 # MITOC Trips database settings.
 db_host: REDACTED
 db_password: REDACTED
