@@ -50,7 +50,7 @@ django_environment:
   GEAR_DATABASE_HOST: "{{ gear_db_host|default('localhost') }}"
   SES_USER: "{{ ses_user|default('') }}"
   SES_PASSWORD: "{{ ses_password|default('') }}"
-  BROKER_URL: "{{ broker_url }}"
+  CELERY_BROKER_URL: "{{ celery_broker_url }}"
   DISABLE_GSHEETS: "{{ disable_gsheets|default('') }}"
   OAUTH_JSON_CREDENTIALS: "{{ project_path }}/oauth_credentials.json"
   RAVEN_DSN: "{{ raven_dsn|default('') }}"
