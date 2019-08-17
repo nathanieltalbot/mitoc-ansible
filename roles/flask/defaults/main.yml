@@ -26,7 +26,7 @@ mutual_tls_error_log_file: "{{ flask_application_log_dir }}/tls_nginx_error.log"
 # Flask environment variables.
 flask_environment:
   CYBERSOURCE_SECRET_KEY: "{{ cybersource_secret_key }}"
-  VERIFY_CYBERSOURCE_SIGNATURE: "{{ verify_cybersource_signature|default('1')}}"
+  VERIFY_CYBERSOURCE_SIGNATURE: "{{ verify_cybersource_signature|default('true')}}"
   MEMBERSHIP_SECRET_KEY: "{{ membership_secret_key }}"
   GEAR_DATABASE_NAME: "{{ gear_db_name }}"
   GEAR_DATABASE_USER: "{{ gear_db_user }}"
