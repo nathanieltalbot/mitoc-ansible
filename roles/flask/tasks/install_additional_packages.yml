@@ -6,4 +6,5 @@
     - libpq-dev
     - "{{ virtualenv_python_version + '-dev' }}"
     - mysql-client
+    - libssl-dev
     - libmysqlclient-dev

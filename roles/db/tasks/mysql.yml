@@ -5,6 +5,7 @@
   with_items:
     - mysql-server
     - mysql-client
+    - libssl-dev  # Needed for mysqlclient
     - libmysqlclient-dev
   tags: packages
 
