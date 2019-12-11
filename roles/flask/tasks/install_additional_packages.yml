@@ -1,10 +1,12 @@
 ---
 
 - name: Install additional packages
-  apt: name={{ item }} update_cache={{ update_apt_cache }} state=present
-  with_items:
-    - libpq-dev
-    - "{{ virtualenv_python_version + '-dev' }}"
-    - mysql-client
-    - libssl-dev
-    - libmysqlclient-dev
+  apt:
+    update_cache: "{{ update_apt_cache }}"
+    state: present
+    name:
+      - libpq-dev
+      - "{{ virtualenv_python_version + '-dev' }}"
+      - mysql-client
+      - libssl-dev
+      - libmysqlclient-dev

@@ -1,10 +1,11 @@
 ---
 
-- name: Make sure the npm is installed
-  apt: name={{ item }} state=present
-  with_items:
-    - nodejs
-    - npm
+- name: Make sure node & npm are installed
+  apt:
+    name:
+      - nodejs
+      - npm
+    state: present
   tags:
     - packages
 
