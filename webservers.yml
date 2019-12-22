@@ -19,5 +19,6 @@
     - certbot
     - rabbitmq
     - web
+    - flask
     - celery
     - nginx

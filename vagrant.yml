@@ -22,6 +22,6 @@
     - db
     - rabbitmq
     - web
+    - flask
     - celery
     - nginx
-    - flask
