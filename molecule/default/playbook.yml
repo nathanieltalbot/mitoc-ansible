@@ -22,6 +22,9 @@
     - name: Install Python3
       raw: apt-get install python3-minimal
       changed_when: false
+  module_defaults:
+    apt:
+      force_apt_get: true
 
   roles:
     - security
