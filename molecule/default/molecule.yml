@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: instance-bionic
     image: ubuntu
     image_version: bionic
     privileged: true

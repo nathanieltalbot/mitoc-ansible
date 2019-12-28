@@ -15,6 +15,8 @@
     state: present
     name:
       - rabbitmq-server
+  tags:
+    - packages
 
 - name: Enable the RabbitMQ Management Console
   rabbitmq_plugin: names=rabbitmq_management state=enabled

@@ -38,4 +38,5 @@
     - web
     - flask
     - celery
+    - memcached
     - nginx
