@@ -13,7 +13,11 @@
   hosts: all
   vars:
     update_apt_cache: true
+    # /etc/ssh does not exist at early stages during the test run, so just skip.
+    # TODO: Make sure that openssh-server is properly installed & configured early.
+    use_more_restrictive_sshd_config: false
     force_ssh_authentication: false
+
   vars_files:
     - ../../env_vars/base.yml
     - ../../env_vars/vagrant.yml
