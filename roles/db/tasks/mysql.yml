@@ -6,11 +6,6 @@
     - mysql-server
     - mysql-client
     - libmysqlclient-dev
-    - libssl-dev
-    - libffi-dev
-    - libxml2-dev
-    - libxslt1-dev
-    - zlib1g-dev
   tags: packages
 
 - name: Install mysqlclient
