@@ -1,11 +1,14 @@
 ---
 
 - name: Install MySQL
-  apt: name={{ item }} update_cache={{ update_apt_cache }} state=present
-  with_items:
-    - mysql-server
-    - mysql-client
-    - libmysqlclient-dev
+  apt:
+    update_cache: "{{ update_apt_cache }}"
+    state: present
+    name:
+      - mysql-server
+      - mysql-client
+      - libssl-dev  # Needed for mysqlclient
+      - libmysqlclient-dev
   tags: packages
 
 - name: Install mysqlclient

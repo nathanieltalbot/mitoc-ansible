@@ -25,10 +25,22 @@
   command: virtualenv -p {{ virtualenv_python_version }} {{ virtualenv_path }}
            creates={{ virtualenv_path }}/bin/activate
 
+- name: Download the poetry installer
+  get_url:
+    url: https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py
+    dest: "{{ webapps_dir }}/get-poetry.py"
+    mode: 0440
+
+- name: Install/Update poetry
+  command: "python {{ webapps_dir }}/get-poetry.py -y"
+  register: poetry_update
+  changed_when: "'Latest version already installed' not in poetry_update.stdout"
+
 - name: Ensure gunicorn is installed in the virtualenv
-  pip: virtualenv={{ virtualenv_path }} name={{ item }}
-  with_items:
-    - gunicorn
+  pip:
+    virtualenv: "{{ virtualenv_path }}"
+    name:
+      - gunicorn
 
 - name: Create the Gunicorn script file
   template: src=gunicorn_start.j2
@@ -96,6 +108,7 @@
             group={{ gunicorn_group }}
             mode=0640
             backup=yes
+  notify: restart application
   tags: deploy
 
 - name: Create the maintenance page

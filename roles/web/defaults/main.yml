@@ -7,8 +7,10 @@ recreate_virtualenv: true
 virtualenv_python_version: python3.6
 
 
+webapps_dir: "/webapps"
+
 # Application settings.
-virtualenv_path: "/webapps/{{ django_application_name }}"
+virtualenv_path: "{{ webapps_dir }}/{{ django_application_name }}"
 project_path: "{{ virtualenv_path }}/{{ django_project_name }}"
 application_log_dir: "{{ virtualenv_path }}/logs"
 application_log_file: "{{ application_log_dir }}/gunicorn_supervisor.log"

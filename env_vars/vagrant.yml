@@ -5,6 +5,15 @@ setup_git_repo: true
 git_branch: master
 
 
+# Security settings
+# No need to have our own firewall - port access is controlled in AWS
+enable_ufw: false
+# Setting this to `true` (with `server_user` == root), will lock out SSH!
+force_ssh_authentication: false
+# Manually lock down SSH like we do in production (not strictly necessary)
+# use_more_restrictive_sshd_config: true
+
+
 # Database settings.
 db_user: "{{ django_application_name }}"
 db_name: "{{ django_application_name }}"

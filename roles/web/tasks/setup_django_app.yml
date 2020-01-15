@@ -1,10 +1,23 @@
 ---
 
-- name: Make sure the npm is installed
-  apt: name={{ item }} state=present
-  with_items:
-    - nodejs
-    - npm
+- name: Install the GPG key for Node
+  apt_key:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    state: present
+  tags: makestuff
+
+- name: Install Node.js 12 LTS repository  # (12.x is EOL in April, 2022)
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_12.x bionic main"
+    state: present
+    update_cache: true
+  tags: makestuff
+
+- name: Make sure node & npm are installed
+  apt:
+    name:
+      - nodejs
+    state: present
   tags:
     - packages
 
@@ -16,13 +29,22 @@
   tags:
     - packages
 
+# Note: this is the legacy npm bundle
 - name: Install dependencies with npm
   npm:
     path: "{{ project_path }}"
     production: true
 
-- name: Install packages required by the Django app inside virtualenv
-  pip: virtualenv={{ virtualenv_path }} requirements={{ requirements_file }}
+- name: Create a script to make the application
+  template: src=make_project.j2
+            dest={{ virtualenv_path }}/bin/make_project
+            mode=0755
+
+# Preferably, we'd just use the `make` module directly instead of a template + command.
+# However, we invoke poetry as part of our `make` targets.
+# To ensure that dependencies get installed into the venv, we must activate the venv first.
+- name: Make the project
+  command: "{{ virtualenv_path }}/bin/make_project"
 
 - name: Copy over the Google API credentials
   template: src=oauth_credentials.j2

@@ -9,6 +9,7 @@ ANSIBLE_TAGS=ENV['ANSIBLE_TAGS']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/bionic64"
+  config.ssh.forward_agent = false
 
   config.vm.define "mitoc-trips.local", primary: true do |app|
     app.vm.hostname = "mitoc-trips"

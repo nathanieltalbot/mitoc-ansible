@@ -3,6 +3,10 @@
 root_name: mitoc
 client_root_name: root_certificate
 
+# Set this flag to true so you can checkout code from a private git repository
+# which is setup with an SSH key.
+ssh_forward_agent: false
+
 django_project_name: mitoc-trips
 django_application_name: ws
 

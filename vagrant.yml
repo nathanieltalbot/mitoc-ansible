@@ -11,6 +11,9 @@
   vars_files:
     - env_vars/base.yml
     - env_vars/vagrant.yml
+  module_defaults:
+    apt:
+      force_apt_get: true
 
   roles:
     - security
@@ -19,6 +22,6 @@
     - db
     - rabbitmq
     - web
+    - flask
     - celery
     - nginx
-    - flask

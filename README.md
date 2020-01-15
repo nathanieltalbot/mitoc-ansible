@@ -24,16 +24,16 @@ After that, you will have a fully functional web server accessible at
 https://mitoc-trips.local
 
 ### Development (`development.yml`)
-This playbook allows running all infrastructure an AWS. By default, it runs a
+This playbook allows running all infrastructure on AWS. By default, it runs a
 Postgres server on the same instance as the webserver, but could easily be
 configured to use RDS instead.
 
 Just like a local development machine, the EC2 instance can easily be created
 using Vagrant.
 
-1. Store [AWS credentials][aws-credentials] in `.aws/credentials` or directly in the `Vagrantfile`
-2. Create a [keypair][aws-keypairs] or import an existing one
-3. Install and configure vagrant-aws
+1. Store [AWS credentials][aws-credentials] in `.aws/credentials` or directly in the `Vagrantfile`.
+2. Create a [keypair][aws-keypairs] or import an existing one.
+3. Install and configure `vagrant-aws`:
 
     ```bash
     vagrant plugin install vagrant-aws
@@ -47,7 +47,7 @@ using Vagrant.
     ```
 
 ### Production (`production.yml`)
-The production playbook contains various secrets used in production, including (but 
+The production playbook contains various secrets used in production, including (but
 not limited to):
 
 - The Django `SECRET_KEY`

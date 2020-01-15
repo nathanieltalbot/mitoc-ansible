@@ -8,6 +8,8 @@
   ufw: rule=allow port={{ item }}
   with_items:
     - "{{ ufw_allowed_ports }}"
+  tags: molecule-notest
 
 - name: Enable ufw/firewall
   ufw: state=enabled policy=deny
+  tags: molecule-notest
